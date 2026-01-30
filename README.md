@@ -1,5 +1,7 @@
 # Telemetry Vault
 
+![alt text](image.png)
+
 Telemetry Vault is a client-side telemetry exploration tool that allows filtering and aggregating telemetry events by time range, type, source, and aggregation strategy.
 
 This project was built as a frontend-focused exercise to demonstrate state management, data modeling, performance considerations, and testing strategy in a React + TypeScript codebase.
