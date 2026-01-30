@@ -9,92 +9,82 @@ This document outlines the assumptions made while building Telemetry Vault in th
 - All telemetry events share a uniform schema
 
 - Timestamps are:
+  - Unix epoch in milliseconds
 
-Unix epoch in milliseconds
+  - Comparable across all event sources
 
-Comparable across all event sources
+- Numeric value exists for all events, including logs
 
-Numeric value exists for all events, including logs
+- Event types are limited to:
+  - log
 
-Event types are limited to:
+  - metric
 
-log
+  - trace
 
-metric
+- Event sources are a finite, known list
 
-trace
+- Aggregations (count, avg, p95) are computed over raw event values
 
-Event sources are a finite, known list
+- Data does not change in real time once loaded
 
-Aggregations (count, avg, p95) are computed over raw event values
-
-Data does not change in real time once loaded
-
-No authentication or authorization is required to view telemetry
+- No authentication or authorization is required to view telemetry
 
 ## What Would Be Validated With Product or Backend
 
 - Event semantics
+  - Do logs really have numeric values?
 
-Do logs really have numeric values?
-
-Should traces be aggregated differently?
+  - Should traces be aggregated differently?
 
 - Aggregation definitions
+  - Exact definition of P95
 
-Exact definition of P95
-
-Whether percentiles should be approximate or exact
+  - Whether percentiles should be approximate or exact
 
 - Time handling
+  - Timezone expectations
 
-Timezone expectations
+  - Clock skew across sources
 
-Clock skew across sources
-
-Inclusive vs exclusive time ranges
+  - Inclusive vs exclusive time ranges
 
 - Filtering behavior
+  - Whether "all" should be explicit or implicit
 
-Whether "all" should be explicit or implicit
-
-Default filter values on initial load
+  - Default filter values on initial load
 
 - Source taxonomy
+  - Are sources static or dynamic?
 
-Are sources static or dynamic?
-
-Can sources be hierarchical?
+  - Can sources be hierarchical?
 
 - Result shape
-
-Should queries return raw rows, aggregates, or both?
+  - Should queries return raw rows, aggregates, or both?
 
 - Pagination expectations
-
-Maximum number of rows allowed in a single response
+  - Maximum number of rows allowed in a single response
 
 - Error handling
-
-How partial failures should surface in the UI
+  - How partial failures should surface in the UI
 
 ## What Might Be Wrong
 
-Percentile calculation may not match backend implementation
+- Percentile calculation may not match backend implementation
 
-Averaging values across mixed event types may be invalid
+- Averaging values across mixed event types may be invalid
 
-Treating logs as numeric may oversimplify reality
+- Treating logs as numeric may oversimplify reality
 
-In-memory filtering may hide performance issues that appear at scale
+- In-memory filtering may hide performance issues that appear at scale
 
-Assuming consistent event schemas may break with real data
+- Assuming consistent event schemas may break with real data
 
-UI defaults may not align with actual product expectations
+- UI defaults may not align with actual product expectations
 
-Source lists may change dynamically in production
+- Source lists may change dynamically in production
 
-Time range filtering may behave differently once server-side
+- Time range filtering may behave differently once server-side
 
 ## Summary
 
