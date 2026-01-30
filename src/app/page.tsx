@@ -42,13 +42,58 @@ export default function HomePage() {
 
   return (
     <main>
+      <style>{`
+        .filters {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 1rem;
+          margin: 1.5rem 0;
+        }
+
+        .filter-group {
+          border: 1px solid #e5e7eb;
+          padding: 0.75rem;
+          border-radius: 8px;
+          background: #fafafa;
+        }
+
+        .filter-group legend {
+          font-size: 12px;
+          font-weight: 600;
+          padding: 0 6px;
+          color: #374151;
+        }
+
+        .filter-group label {
+          display: flex;
+          flex-direction: column;
+          font-size: 13px;
+          gap: 4px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+          padding: 6px 8px;
+          border-radius: 6px;
+          border: 1px solid #d1d5db;
+          font-size: 14px;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+          outline: none;
+          border-color: #6366f1;
+        }
+      `}</style>
+
       <h1>Telemetry Vault</h1>
+
       <p>
         Aggregation Result: <strong>{result.value}</strong>
       </p>
 
-      <section aria-label="Filters">
-        <fieldset>
+      <section aria-label="Filters" className="filters">
+        <fieldset className="filter-group">
           <legend>Time Range</legend>
 
           <label>
@@ -80,7 +125,7 @@ export default function HomePage() {
           </label>
         </fieldset>
 
-        <fieldset>
+        <fieldset className="filter-group">
           <legend>Event Type</legend>
 
           <select
@@ -100,7 +145,7 @@ export default function HomePage() {
           </select>
         </fieldset>
 
-        <fieldset>
+        <fieldset className="filter-group">
           <legend>Source</legend>
 
           <select
@@ -124,7 +169,7 @@ export default function HomePage() {
           </select>
         </fieldset>
 
-        <fieldset>
+        <fieldset className="filter-group">
           <legend>Aggregation</legend>
 
           <select

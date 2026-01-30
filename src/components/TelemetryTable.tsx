@@ -44,33 +44,75 @@ export function TelemetryTable({ rows }: Props) {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th onClick={() => handleSort("timestamp")}>
-            Time{sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
-          </th>
-          <th onClick={() => handleSort("type")}>
-            Type{sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
-          </th>
-          <th onClick={() => handleSort("source")}>
-            Source{sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
-          </th>
-          <th onClick={() => handleSort("value")}>
-            Value{sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedRows.map((row) => (
-          <tr key={`${row.timestamp}-${row.type}-${row.source}`}>
-            <td>{new Date(row.timestamp).toLocaleTimeString()}</td>
-            <td>{row.type}</td>
-            <td>{row.source}</td>
-            <td>{row.value}</td>
+    <>
+      <table className="telemetry-table">
+        <thead>
+          <tr>
+            <th onClick={() => handleSort("timestamp")}>
+              Time{sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
+            </th>
+            <th onClick={() => handleSort("type")}>
+              Type{sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
+            </th>
+            <th onClick={() => handleSort("source")}>
+              Source
+              {sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
+            </th>
+            <th onClick={() => handleSort("value")}>
+              Value
+              {sortKey === "timestamp" && (sortDir === "asc" ? " ↑" : " ↓")}
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {sortedRows.map((row) => (
+            <tr key={`${row.timestamp}-${row.type}-${row.source}`}>
+              <td>{new Date(row.timestamp).toLocaleTimeString()}</td>
+              <td>{row.type}</td>
+              <td>{row.source}</td>
+              <td>{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <style>{`
+        .telemetry-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 1rem;
+          font-size: 14px;
+        }
+
+        .telemetry-table th,
+        .telemetry-table td {
+          padding: 10px 12px;
+          border-bottom: 1px solid #e5e7eb;
+          text-align: left;
+        }
+
+        .telemetry-table thead {
+          background: #f3f4f6;
+        }
+
+        .telemetry-table th {
+          cursor: pointer;
+          user-select: none;
+          font-weight: 600;
+        }
+
+        .telemetry-table th:hover {
+          background: #e5e7eb;
+        }
+
+        .telemetry-table tbody tr:hover {
+          background: #f9fafb;
+        }
+
+        .telemetry-table td:last-child {
+          font-family: monospace;
+        }
+      `}</style>
+    </>
   );
 }
